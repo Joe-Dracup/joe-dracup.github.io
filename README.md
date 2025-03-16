@@ -1,6 +1,8 @@
-# Nuxt Minimal Starter
+# Helios
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Helios is my go at having a small starter website that i can host some things on.
+
+I am going to try and have a go at turning my notes on development into a small blog and possibly add some more things to this at a later date
 
 ## Setup
 
