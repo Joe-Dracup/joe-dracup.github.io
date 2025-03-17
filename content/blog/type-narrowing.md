@@ -41,7 +41,7 @@ If we attempt to access properties that don't exist across all union members, Ty
 ```typescript
 function logWithMetaData(critter: Creature) {
   console.log(critter.name); // Works because 'name' exists on all types
-  console.log(critter.colour); // Error: Property 'colour' doesn't exist on type 'Creature'
+  console.log(critter.colour); // Error: Property 'colour' doesn't exist on ALL types that make up type 'Creature'
 }
 ```
 
@@ -49,28 +49,9 @@ This is where TypeScript's type narrowing becomes essential. Let's explore the v
 
 ## Type Guards: The Full Arsenal
 
-### Property Checks with 'in'
-
-The `in` operator checks for property existence:
-
-```typescript
-function logWithMetaData(critter: Creature) {
-  console.log(critter.name);
-  if ('colour' in critter) {
-    console.log(critter.colour); // TypeScript now knows this is a Ghost
-  }
-  if ('age' in critter) {
-    console.log(`Human age: ${critter.age}`); // TypeScript now knows this is a Human
-  }
-  if ('prey' in critter) {
-    console.log(`Animal hunts: ${critter.prey}`); // TypeScript now knows this is an Animal
-  }
-}
-```
-
 ### Type Checks with 'typeof'
 
-For primitive types, `typeof` provides narrowing:
+For primitive types, `typeof` provides narrowing, as TypeScript Types do not exist at runtime this is harder to do for objects as `typeof` will just return that this is an `object`:
 
 ```typescript
 function processValue(value: string | number) {
@@ -84,7 +65,11 @@ function processValue(value: string | number) {
 
 ### Instance Checks with 'instanceof'
 
-For class instances, `instanceof` works similarly to C#'s `is` operator:
+For class instances, using the `instanceof` operator will check whether or not this is an instance of that class type. Its important to note that this will only work for classes, and will not work for objects that are typed using TypeScript features.
+
+This is because TypeScript is compiled into plain JavaScript, and so typed objects as defined above will not exist at runtime and so cannot be checked with instance of.
+
+I rarely use JavaScript classes and so don't use this regularly.
 
 ```typescript
 class AnimalClass {
@@ -110,6 +95,27 @@ function processCreature(creature: AnimalClass | HumanClass) {
     console.log(`Animal hunts: ${creature.prey}`);
   } else {
     console.log(`Human age: ${creature.age}`);
+  }
+}
+```
+
+### Property Checks with 'in'
+
+One way of type narrowing for Typed objects is using the `in` operator. This will check whether or not the object being passed in contains a property with the name specified.
+
+The TypeScript compiler can then narrow down the unioned type down to only the type that contains this property
+
+```typescript
+function logWithMetaData(critter: Creature) {
+  console.log(critter.name);
+  if ('colour' in critter) {
+    console.log(critter.colour); // TypeScript now knows this is a Ghost
+  }
+  if ('age' in critter) {
+    console.log(`Human age: ${critter.age}`); // TypeScript now knows this is a Human
+  }
+  if ('prey' in critter) {
+    console.log(`Animal hunts: ${critter.prey}`); // TypeScript now knows this is an Animal
   }
 }
 ```
@@ -188,102 +194,6 @@ function logWithMetaData(critter: Creature) {
 
 This pattern is far more powerful than C#'s type checking because TypeScript's type system can automatically narrow the variable's type within each case. The compiler understands that a creature with `type: 'Ghost'` must be a `Ghost`, giving you type-safe access to all `Ghost`-specific properties without explicit casting.
 
-## C# vs TypeScript: A Side-by-Side Comparison
-
-Let's compare how we'd handle similar scenarios in both languages:
-
-**C# approach:**
-
-```csharp
-// C# implementation
-interface ICreature {
-    string Name { get; }
-}
-
-class Animal : ICreature {
-    public string Name { get; set; }
-    public string Prey { get; set; }
-    public int SleepHours { get; set; }
-}
-
-class Human : ICreature {
-    public string Name { get; set; }
-    public int Age { get; set; }
-}
-
-class Ghost : ICreature {
-    public string Name { get; set; }
-    public string Colour { get; set; }
-}
-
-void ProcessCreature(ICreature creature) {
-    Console.WriteLine(creature.Name);
-
-    // Approach 1: Type checking with pattern matching (C# 7.0+)
-    switch (creature) {
-        case Ghost ghost:
-            Console.WriteLine($"Ghost color: {ghost.Colour}");
-            break;
-        case Human human:
-            Console.WriteLine($"Human age: {human.Age}");
-            break;
-        case Animal animal:
-            Console.WriteLine($"Animal prey: {animal.Prey}");
-            break;
-    }
-
-    // Approach 2: Type checking with is operator
-    if (creature is Ghost ghost2) {
-        Console.WriteLine($"Ghost color: {ghost2.Colour}");
-    } else if (creature is Human human2) {
-        Console.WriteLine($"Human age: {human2.Age}");
-    } else if (creature is Animal animal2) {
-        Console.WriteLine($"Animal prey: {animal2.Prey}");
-    }
-}
-```
-
-**TypeScript approach:**
-
-```typescript
-// TypeScript implementation with discriminated unions
-type Animal = {
-  name: string;
-  prey: string;
-  sleepHours: number;
-  type: 'Animal';
-};
-type Human = {
-  name: string;
-  age: number;
-  type: 'Human';
-};
-type Ghost = {
-  name: string;
-  colour: 'red' | 'blue';
-  type: 'Ghost';
-};
-type Creature = Animal | Human | Ghost;
-
-function processCreature(creature: Creature) {
-  console.log(creature.name);
-
-  switch (creature.type) {
-    case 'Ghost':
-      console.log(`Ghost color: ${creature.colour}`);
-      break;
-    case 'Human':
-      console.log(`Human age: ${creature.age}`);
-      break;
-    case 'Animal':
-      console.log(`Animal prey: ${creature.prey}`);
-      break;
-  }
-}
-```
-
-The key difference? In C#, we need explicit casts or pattern matching to access type-specific properties. In TypeScript, the compiler automatically narrows the type within the conditional block based on property checks or discriminator values.
-
 ## Real-World Example: API Response Handling
 
 Consider a real-world scenario of handling different API response types:
@@ -345,7 +255,7 @@ This pattern enables concise, type-safe handling of different response scenarios
 
 ## Performance Implications
 
-A common concern for C# developers moving to TypeScript is performance impact. Good news: type narrowing has virtually no runtime cost! TypeScript's type system operates entirely at compile time, and the emitted JavaScript contains only the necessary runtime checks (like `if` statements or `switch` cases) that you explicitly write.
+A common concern for C# developers moving to TypeScript is performance impact. Good news: type narrowing has virtually no runtime cost! Because TypeScript's type system operates entirely at compile time, and the emitted JavaScript contains only the necessary runtime checks (like `if` statements or `switch` cases) that you explicitly write.
 
 ```typescript
 // TypeScript with type narrowing
@@ -459,99 +369,6 @@ While powerful, type narrowing isn't perfect:
 
 4. **Type widening**: TypeScript might "widen" literal types in certain contexts, requiring explicit type annotations.
 
-## Migrating from C# Patterns to TypeScript
-
-When transitioning from C# to TypeScript, consider these pattern migrations:
-
-| C# Pattern       | TypeScript Equivalent                                       |
-| ---------------- | ----------------------------------------------------------- |
-| `is` operator    | `typeof`, `instanceof`, or custom type guards               |
-| Pattern matching | Discriminated unions with `switch`                          |
-| Polymorphism     | Interface implementations or duck typing                    |
-| `as` casting     | Type assertions (`as` in TypeScript) or type guards         |
-| Abstract classes | Abstract classes or interfaces with optional implementation |
-
-## Troubleshooting Common Issues
-
-Here are some common pitfalls and their solutions:
-
-1. **Type guard not narrowing as expected**
-
-   Problem:
-
-   ```typescript
-   const creatures: Creature[] = [...];
-   const ghost = creatures.find(c => 'colour' in c);
-   console.log(ghost.colour);  // Error: Property 'colour' does not exist on type 'Creature'
-   ```
-
-   Solution:
-
-   ```typescript
-   const ghost = creatures.find((c) => 'colour' in c) as Ghost;
-   // or better:
-   const ghost = creatures.find((c): c is Ghost => 'colour' in c);
-   ```
-
-2. **Narrowing lost after reassignment**
-
-   Problem:
-
-   ```typescript
-   let creature: Creature = { type: 'Ghost', name: 'Casper', colour: 'blue' };
-   if (creature.type === 'Ghost') {
-     let narrowed = creature;
-     // Inside another function:
-     setTimeout(() => {
-       console.log(creature.colour); // Error: Property 'colour' does not exist on type 'Creature'
-     }, 1000);
-   }
-   ```
-
-   Solution: Capture the narrowed type inside the closure:
-
-   ```typescript
-   if (creature.type === 'Ghost') {
-     const ghost = creature; // Narrowed type
-     setTimeout(() => {
-       console.log(ghost.colour); // Works fine
-     }, 1000);
-   }
-   ```
-
-3. **Using type predicates correctly**
-
-   Problem:
-
-   ```typescript
-   // Incorrect type predicate
-   function isGhost(creature: Creature): boolean {
-     return 'colour' in creature;
-   }
-
-   const creature: Creature = { type: 'Ghost', name: 'Casper', colour: 'blue' };
-   if (isGhost(creature)) {
-     console.log(creature.colour); // Error: Property 'colour' does not exist on type 'Creature'
-   }
-   ```
-
-   Solution:
-
-   ```typescript
-   // Correct type predicate
-   function isGhost(creature: Creature): creature is Ghost {
-     return 'colour' in creature;
-   }
-
-   if (isGhost(creature)) {
-     console.log(creature.colour); // Works fine
-   }
-   ```
-
 ## Conclusion
 
-TypeScript's type narrowing is one of its most powerful features that truly sets it apart from C#'s more rigid type system. The ability to intelligently narrow types based on runtime checks without explicit casts creates code that is both more flexible and safer. For C# developers transitioning to TypeScript, mastering type narrowing is key to writing idiomatic, type-safe TypeScript code.
-
-While there's a learning curve, the payoff is significant: more concise code, fewer runtime errors, and more expressive APIs. By leveraging discriminated unions and the various type guards that TypeScript offers, you can create robust applications that harness the flexibility of JavaScript while maintaining the type safety you're accustomed to in C#.
-
-Remember, effective TypeScript development doesn't mean trying to force C# patterns into JavaScript; it means embracing TypeScript's structural typing system and the unique capabilities it offers. Type narrowing is at the heart of this approach, enabling patterns that simply aren't possible in nominally typed languages like C#.
+TypeScript's type narrowing system provides powerful tools for ensuring code reliability at runtime. However, it's crucial to remember that TypeScript types are compile-time constructs that don't exist during execution. Therefore, the narrowing techniques discussed above must be implemented thoughtfully and appropriately to achieve their intended benefits and prevent potential runtime errors.
