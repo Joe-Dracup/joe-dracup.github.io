@@ -129,6 +129,10 @@
               blockbusters, so much that I started a film club at my current
               role.
             </p>
+            <p>
+              Outside of all of this, I also enjoy reading novels, and
+              occasionally playing games with friends.
+            </p>
           </div>
         </section>
       </div>
