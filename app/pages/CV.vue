@@ -106,33 +106,28 @@
           </ul>
         </section>
 
-        <!-- Outside of work -->
+        <!-- Interests -->
         <section class="print:break-inside-avoid">
           <h3
             class="text-xl text-green-600 print:text-green-600 font-semibold mb-3"
           >
-            Outside of work
+            Interests
           </h3>
           <div class="space-y-3 text-sm">
             <p>
-              Outside of the world of coding, I love spending time hanging out
-              with friends or with my partner. I don't have one main hobby but
-              instead like to take part in a range of different activities.
+              I try to stay up to date as much as possible on modern development
+              practices, as part of this I have attended both NDC london and vue
+              JS Amsterdam with the aim of doing more conferences and meetups in
+              the future.
             </p>
             <p>
               I have climbed several mountains in the UK with the most recent
-              being Scafell Pike (the highest in England). I would like to climb
-              Ben Nevis and Mount Snowdon, completing the three peaks challenge.
+              being Scafell Pike, and the Yorkshire three peaks challenge.
             </p>
             <p>
-              I enjoy photography and own a DSLR camera, along with an Instax
-              (polaroid type) camera. But I mainly just use my phone.
-            </p>
-            <p>
-              I love to watch a range of films, from classics to the
-              blockbusters, and TV shows like Game of Thrones and WandaVision,
-              to more modern pop culture like the films from the Marvel
-              Cinematic Universe.
+              In my free time I enjoy watching films, from classics to
+              blockbusters, so much that I started a film club at my current
+              role.
             </p>
           </div>
         </section>
