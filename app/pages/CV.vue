@@ -34,19 +34,19 @@
             Contact
           </h3>
           <ul class="space-y-1">
-            <li>
-              <a
-                href="https://www.linkedin.com/in/joe-dracup"
-                class="hover:text-green-600"
-                >www.linkedin.com/in/joe-dracup</a
-              >
-            </li>
             <li>07552413479</li>
             <li>
               <a
                 href="mailto:josephdracup1@gmail.com"
                 class="hover:text-green-600"
                 >josephdracup1@gmail.com</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/joe-dracup"
+                class="hover:text-green-600"
+                >www.linkedin.com/in/joe-dracup</a
               >
             </li>
             <li>
@@ -74,19 +74,18 @@
           <ul class="list-disc pl-5 space-y-1">
             <li>.Net</li>
             <li>C#</li>
-            <li>JavaScript</li>
             <li>TypeScript</li>
+            <li>JavaScript</li>
             <li>Vue</li>
             <li>Nuxt</li>
             <li>React</li>
             <li>SQL</li>
+            <li>Azure DevOps</li>
             <li>Git</li>
+            <li>Github Actions</li>
             <li>HTML</li>
             <li>CSS</li>
             <li>Tailwind</li>
-            <li>Communication</li>
-            <li>Leadership</li>
-            <li>Problem solving</li>
             <li>Agile</li>
             <li>Scrum</li>
           </ul>
@@ -101,8 +100,8 @@
           </h3>
           <ul class="list-disc pl-5 space-y-1">
             <li>Software development level 3 Apprenticeship</li>
-            <li>4 A / AS levels, including a Distinction* in ICT</li>
-            <li>9 GCSEs, English and Maths</li>
+            <li>3 A levels, including a Distinction* in ICT</li>
+            <li>9 GCSEs, including English (B) and Maths (B)</li>
           </ul>
         </section>
 
@@ -116,7 +115,7 @@
           <div class="space-y-3 text-sm">
             <p>
               I try to stay up to date as much as possible on modern development
-              practices, as part of this I have attended both NDC london and vue
+              practices, as part of this I have attended both NDC london and Vue
               JS Amsterdam with the aim of doing more conferences and meetups in
               the future.
             </p>
@@ -130,7 +129,7 @@
               role.
             </p>
             <p>
-              Outside of all of this, I also enjoy reading novels, and
+              Outside of all of this, I also enjoy reading books, and
               occasionally playing games with friends.
             </p>
           </div>
@@ -154,8 +153,8 @@
               commitment to continuous learning and professional growth. Skilled
               in designing and implementing innovative solutions to complex
               technical challenges, with a focus on delivering scalable and
-              efficient software. Experienced in mentoring junior members of the
-              team and fostering a collaborative environment to drive success.
+              efficient software. Experienced in mentoring junior team members
+              and fostering a collaborative environment to drive success.
               Passionate about leveraging expertise to enhance both individual
               and team performance while contributing to the overall business
               objectives.
@@ -182,12 +181,12 @@
             </div>
             <div class="space-y-3 text-sm">
               <p>
-                Worked on a white labled insurance software as a service
-                product, servicing multiple tenants of various sizes. Including
-                working on integrations with payment providers, aggregation
-                sites, and other data providers. Also developed several areas of
-                their call-centre software, and implemented a new customer
-                portal.
+                Worked on a white labeled insurance software as a service
+                product, servicing multiple tenants of various sizes. Developed
+                integrations with payment providers, aggregation sites, and
+                other data providers. I also developed several areas of the
+                call-centre software used by the brokers, and implemented a new
+                multi-tenanted customer portal.
               </p>
 
               <p>Key Achievements:</p>
@@ -196,22 +195,23 @@
                   Developed APIs in .Net core to service a customer facing site.
                 </li>
                 <li>
-                  Developed a new question set package using vue and formkit to
+                  Developed a new question set package using Vue and Formkit to
                   be able to speed up building forms for both the call centre
                   and customer facing site.
                 </li>
                 <li>
                   Developed a new content driven customer facing site for
-                  creating and managing insurance policies, using nuxt and
-                  nuxt-content.
+                  creating and managing insurance policies, using Nuxt and
+                  Nuxt-Content.
                 </li>
                 <li>
                   Mentored junior members of the team, from apprentice to mid
                   level engineers.
                 </li>
                 <li>
-                  Aided in creating a set of code quality standards to help
-                  ensure a high standard of work accross the team.
+                  Aided in creating and implementing a set of code quality
+                  standards to help ensure a high standard of work across the
+                  team.
                 </li>
                 <li>
                   Created and modified github actions pipelines for CI and CD,
@@ -234,12 +234,10 @@
             </div>
             <div class="space-y-3 text-sm">
               <p>
-                At musicMagpie, I had the opportunity to lead and contribute to
-                a variety of projects, working alongside talented teams to
-                deliver impactful software solutions in the e-commerce space.
-                During my time there, I expanded my technical expertise and took
-                on new challenges, particularly in cloud infrastructure,
-                development tools, and team processes.
+                Worked on a multi-tenanted e-commerce site as part of the
+                checkout team, modernising from a Ruby on Rails application to
+                .Net core APIs with a vue front end. Delivered azure functions
+                to aid in obfuscation of customer data for GDPR compliance.
               </p>
 
               <p>Key Achievements:</p>
@@ -250,20 +248,16 @@
                 </li>
                 <li>
                   Gained experience in Infrastructure as Code using Terraform to
-                  automatecloud deployments.
+                  automate cloud deployments.
                 </li>
                 <li>
-                  Worked with MySQL for the first time, gaining hands-on
-                  experience in database design and optimization.
-                </li>
-                <li>
-                  Utilized Docker to streamline local development environments,
+                  Utilised Docker to streamline local development environments,
                   improving setup times for the team.
                 </li>
                 <li>
-                  Played a key role inadopting the Scrum framework, providing
-                  insights from previous experience to optimize workflows and
-                  suggesting tools to enhanceproductivity.
+                  Played a key role in adopting the Scrum framework, providing
+                  insights from previous experience to optimise workflows and
+                  suggesting tools to enhance productivity.
                 </li>
               </ul>
             </div>
@@ -282,13 +276,10 @@
             </div>
             <div class="space-y-3 text-sm">
               <p>
-                Relocating to Manchester and joining Chess was a pivotal
-                experience in both my personal and professional growth. During
-                my time there, I gained significant confidence in my technical
-                skills and in interacting with colleagues and stakeholders. I
-                played an integral role in developing key internal systems and
-                transforming our customer portal, all while building strong
-                relationships across the company.
+                Built a strong foundational knowledge in software engineering,
+                while working on several key projects, including merging several
+                customer management systems to provide a holistic view of the
+                businesses customers.
               </p>
 
               <p>Key Achievements:</p>
@@ -303,7 +294,7 @@
                 </li>
                 <li>
                   Played a crucial role in consolidating several CRM systems to
-                  provide a comprehensive view of customers.
+                  provide a comprehensive and holistic view of customers.
                 </li>
                 <li>
                   Assisted in releasing a new version of the customer portal,
@@ -319,9 +310,9 @@
                   including VB, SQL, JavaScript, TypeScript, and C#.
                 </li>
                 <li>
-                  Developed strong communication and stakeholder management
-                  skills, including gathering requirements, demoing work, and
-                  working within an agile Scrum framework.
+                  Worked within an agile environment covering many roles,
+                  including gathering requirements, demoing work, delivering
+                  work within a Scrum team.
                 </li>
                 <li>
                   Successfully completed an apprenticeship and earned a Software
