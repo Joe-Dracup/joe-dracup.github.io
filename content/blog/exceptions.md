@@ -35,7 +35,7 @@ IndexOutOfRangeException
 
 Boneheaded exceptions are exceptions that are caused by missusing code. They are typically a sign of a bug and so should be left unhandled.
 
-When writing code that is going to be re-used make sure to throw boneheaded exceptions to prevent this code from being re-used incorrecrtly. ArgumentExceptions should be used to ensure that the arguments provided are going to provide the expected results and should be preffered over defaulting missing or mal-formed arguments as this could look right when calling the code, but produce effects that dont match what the user sees.
+When writing code that is going to be re-used make sure to throw boneheaded exceptions to prevent this code from being re-used incorrecrtly. ArgumentExceptions should be used to ensure that the arguments provided are going to provide the expected results and should be preferred over defaulting missing or mal-formed arguments as this could look right when calling the code, but produce effects that dont match what the user sees.
 
 A boneheaded exception is preferable to this as you will quickly identify the source of the issue, and not cause hard to find bugs in your application.
 
@@ -56,9 +56,9 @@ function saveSomething(item: ObjectToSave) {
 }
 ```
 
-In the first typescript example above the function will do nothing if the item provided to it has no value, this is not immediatley obvious to any calling code and could be hard to debug.
+In the first typescript example above the function will do nothing if the item provided to it has no value, this is not immediately obvious to any calling code and could be hard to debug.
 
-In the second example it is immediatley obvious that this has been called with the wrong values when the calling function propagates the error up the call stack. 
+In the second example it is immediately obvious that this has been called with the wrong values when the calling function propagates the error up the call stack. 
 
 For this reason you should not try and handle boneheaded exceptions with catch blocks. These should be allowed to fail so that the bug they are preventing can be fixed early before this reaches production.
 
@@ -79,7 +79,7 @@ The main use case for this is to transform user input into an int that can be us
 
 This instead should be avoided for the `Int32.TryParse` function which will not throw the vexing exception, and instead informs you whether the format is correct without throwing an exception.
 
-```C#
+```csharp
 
 string userInput = "blah";
 
@@ -105,7 +105,7 @@ else
 }
 ```
 
-In the above C# examples, it is not immediatley obvious that the Parse function will cause an error, however it is clear by the method signature that TryParse may or may not actually parse the input and so developers calling this code will by default handle the case that this fails.
+In the above C# examples, it is not immediately obvious that the Parse function will cause an error, however it is clear by the method signature that TryParse may or may not actually parse the input and so developers calling this code will by default handle the case that this fails.
 
 Using the `TryParse` function over throwing an exception to control the flow of the application is good, but in modern development I would say to look at using the result pattern to explicitly show the caller of your code that this actioin may fail.
 
@@ -119,10 +119,10 @@ ResourceUnavailable
 
 Exogenous exceptions are exceptions that occur outside of the scope of your application, these are hard to predict and prevent as with things like accessing files on your machine the point in time that you check for its existence is not the time that you attempt to read from the file and something could delete it between these points.
 
-You should not try and prevent these, and instead should just allow them to fail. Don't try and swallow exogenous exceptions, instead allow these to propegate up your architecture and handle them high in the stack.
+You should not try and prevent these, and instead should just allow them to fail. Don't try and swallow exogenous exceptions, instead allow these to propagate up your architecture and handle them high in the stack.
 
 ## Overall
 
 Looking back at the four types of exceptions, it makes sense that most of these should not really be caught deep in the application, and should be handled closer to your UI layer.
 
-You should ensure that you are throwing boneheaded exceptions where appropriate to avoid issues that are not immediatley obvious.
+You should ensure that you are throwing boneheaded exceptions where appropriate to avoid issues that are not immediately obvious.
