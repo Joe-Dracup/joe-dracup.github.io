@@ -13,7 +13,7 @@ const items = ref([
   {
     label: 'Full CV',
     icon: 'dashicons:text-page',
-    to: '/CV',
+    to: '/cv',
   },
   {
     slot: 'mode',
