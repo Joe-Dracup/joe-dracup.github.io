@@ -24,8 +24,10 @@ const items = ref([
 <template>
   <UNavigationMenu :items="items" class="w-full justify-center print:hidden">
     <template #mode>
-      <DarkModeToggle />
+      <UColorModeSwitch />
     </template>
   </UNavigationMenu>
+  <ClientOnly>
   <slot />
+  </ClientOnly>
 </template>
