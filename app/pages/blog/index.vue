@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { data: posts } = await useAsyncData('blog', () =>
-  queryCollection('blog').all()
-);
+  queryCollection('blog').order('date', 'DESC').all())
 </script>
 
 <template>
@@ -20,7 +19,7 @@ const { data: posts } = await useAsyncData('blog', () =>
             :to="post.path"
             class="text-gray-50 dark:text-gray-700 block"
           >
-            {{ post.date }} - {{ post.title }}
+            {{ new Date(post.date).toLocaleDateString() }} - {{ post.title }}
           </NuxtLink>
         </li>
       </ul>

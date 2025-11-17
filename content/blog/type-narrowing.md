@@ -20,28 +20,28 @@ Because of this fundamental difference, we can use the TypeScript compiler to in
 When working with union types in TypeScript, you'll often need to handle different types in specialized ways. Consider this scenario where we have multiple creature types:
 
 ```typescript
-type Animal = {
-  name: string;
-  prey: string;
-  sleepHours: number;
-};
-type Human = {
-  name: string;
-  age: number;
-};
-type Ghost = {
-  name: string;
-  colour: 'red' | 'blue';
-};
-type Creature = Animal | Human | Ghost;
+interface Animal {
+  name: string
+  prey: string
+  sleepHours: number
+}
+interface Human {
+  name: string
+  age: number
+}
+interface Ghost {
+  name: string
+  colour: 'red' | 'blue'
+}
+type Creature = Animal | Human | Ghost
 ```
 
 If we attempt to access properties that don't exist across all union members, TypeScript will raise an error:
 
 ```typescript
 function logWithMetaData(critter: Creature) {
-  console.log(critter.name); // Works because 'name' exists on all types
-  console.log(critter.colour); // Error: Property 'colour' doesn't exist on ALL types that make up type 'Creature'
+  console.log(critter.name) // Works because 'name' exists on all types
+  console.log(critter.colour) // Error: Property 'colour' doesn't exist on ALL types that make up type 'Creature'
 }
 ```
 
@@ -56,9 +56,10 @@ For primitive types, `typeof` provides narrowing, as TypeScript Types do not exi
 ```typescript
 function processValue(value: string | number) {
   if (typeof value === 'string') {
-    console.log(value.toUpperCase()); // TypeScript knows this is a string
-  } else {
-    console.log(value.toFixed(2)); // TypeScript knows this is a number
+    console.log(value.toUpperCase()) // TypeScript knows this is a string
+  }
+  else {
+    console.log(value.toFixed(2)) // TypeScript knows this is a number
   }
 }
 ```
@@ -73,28 +74,29 @@ I rarely use JavaScript classes and so don't use this regularly.
 
 ```typescript
 class AnimalClass {
-  name: string;
-  prey: string;
+  name: string
+  prey: string
   constructor(name: string, prey: string) {
-    this.name = name;
-    this.prey = prey;
+    this.name = name
+    this.prey = prey
   }
 }
 
 class HumanClass {
-  name: string;
-  age: number;
+  name: string
+  age: number
   constructor(name: string, age: number) {
-    this.name = name;
-    this.age = age;
+    this.name = name
+    this.age = age
   }
 }
 
 function processCreature(creature: AnimalClass | HumanClass) {
   if (creature instanceof AnimalClass) {
-    console.log(`Animal hunts: ${creature.prey}`);
-  } else {
-    console.log(`Human age: ${creature.age}`);
+    console.log(`Animal hunts: ${creature.prey}`)
+  }
+  else {
+    console.log(`Human age: ${creature.age}`)
   }
 }
 ```
@@ -107,15 +109,15 @@ The TypeScript compiler can then narrow down the unioned type down to only the t
 
 ```typescript
 function logWithMetaData(critter: Creature) {
-  console.log(critter.name);
+  console.log(critter.name)
   if ('colour' in critter) {
-    console.log(critter.colour); // TypeScript now knows this is a Ghost
+    console.log(critter.colour) // TypeScript now knows this is a Ghost
   }
   if ('age' in critter) {
-    console.log(`Human age: ${critter.age}`); // TypeScript now knows this is a Human
+    console.log(`Human age: ${critter.age}`) // TypeScript now knows this is a Human
   }
   if ('prey' in critter) {
-    console.log(`Animal hunts: ${critter.prey}`); // TypeScript now knows this is an Animal
+    console.log(`Animal hunts: ${critter.prey}`) // TypeScript now knows this is an Animal
   }
 }
 ```
@@ -126,24 +128,26 @@ For more complex scenarios, custom type guards provide ultimate flexibility:
 
 ```typescript
 function isAnimal(creature: Creature): creature is Animal {
-  return 'prey' in creature;
+  return 'prey' in creature
 }
 
 function isHuman(creature: Creature): creature is Human {
-  return 'age' in creature;
+  return 'age' in creature
 }
 
 function isGhost(creature: Creature): creature is Ghost {
-  return 'colour' in creature;
+  return 'colour' in creature
 }
 
 function processCreature(creature: Creature) {
   if (isAnimal(creature)) {
-    console.log(`Animal ${creature.name} hunts ${creature.prey}`);
-  } else if (isHuman(creature)) {
-    console.log(`Human ${creature.name} is ${creature.age} years old`);
-  } else if (isGhost(creature)) {
-    console.log(`Ghost ${creature.name} is ${creature.colour}`);
+    console.log(`Animal ${creature.name} hunts ${creature.prey}`)
+  }
+  else if (isHuman(creature)) {
+    console.log(`Human ${creature.name} is ${creature.age} years old`)
+  }
+  else if (isGhost(creature)) {
+    console.log(`Ghost ${creature.name} is ${creature.colour}`)
   }
 }
 ```
@@ -153,41 +157,41 @@ function processCreature(creature: Creature) {
 While the above approaches work, they can become cumbersome for complex types. The discriminated union pattern adds a literal "type tag" to each interface, creating a clear way to differentiate between union members:
 
 ```typescript
-type Animal = {
-  name: string;
-  prey: string;
-  sleepHours: number;
-  type: 'Animal'; // Type discriminator
-};
-type Human = {
-  name: string;
-  age: number;
-  type: 'Human'; // Type discriminator
-};
-type Ghost = {
-  name: string;
-  colour: 'red' | 'blue';
-  type: 'Ghost'; // Type discriminator
-};
-type Creature = Animal | Human | Ghost;
+interface Animal {
+  name: string
+  prey: string
+  sleepHours: number
+  type: 'Animal' // Type discriminator
+}
+interface Human {
+  name: string
+  age: number
+  type: 'Human' // Type discriminator
+}
+interface Ghost {
+  name: string
+  colour: 'red' | 'blue'
+  type: 'Ghost' // Type discriminator
+}
+type Creature = Animal | Human | Ghost
 ```
 
 Now we can perform precise type narrowing based on the discriminator:
 
 ```typescript
 function logWithMetaData(critter: Creature) {
-  console.log(critter.name);
+  console.log(critter.name)
 
   switch (critter.type) {
     case 'Ghost':
-      console.log(`Ghost color: ${critter.colour}`);
-      break;
+      console.log(`Ghost color: ${critter.colour}`)
+      break
     case 'Human':
-      console.log(`Human age: ${critter.age}`);
-      break;
+      console.log(`Human age: ${critter.age}`)
+      break
     case 'Animal':
-      console.log(`Animal prey: ${critter.prey}`);
-      break;
+      console.log(`Animal prey: ${critter.prey}`)
+      break
   }
 }
 ```
@@ -261,18 +265,20 @@ A common concern for C# developers moving to TypeScript is performance impact. G
 // TypeScript with type narrowing
 function processValue(value: string | number) {
   if (typeof value === 'string') {
-    return value.toUpperCase();
-  } else {
-    return value.toFixed(2);
+    return value.toUpperCase()
+  }
+  else {
+    return value.toFixed(2)
   }
 }
 
 // Compiled JavaScript - identical runtime behavior to hand-written JS
 function processValue(value) {
   if (typeof value === 'string') {
-    return value.toUpperCase();
-  } else {
-    return value.toFixed(2);
+    return value.toUpperCase()
+  }
+  else {
+    return value.toFixed(2)
   }
 }
 ```
@@ -289,18 +295,18 @@ TypeScript can ensure you've handled all possible types in a union:
 function processCreature(creature: Creature): void {
   switch (creature.type) {
     case 'Ghost':
-      console.log(`Ghost color: ${creature.colour}`);
-      break;
+      console.log(`Ghost color: ${creature.colour}`)
+      break
     case 'Human':
-      console.log(`Human age: ${creature.age}`);
-      break;
+      console.log(`Human age: ${creature.age}`)
+      break
     case 'Animal':
-      console.log(`Animal prey: ${creature.prey}`);
-      break;
+      console.log(`Animal prey: ${creature.prey}`)
+      break
     default:
       // This function will only be called if we've missed a case
-      const exhaustiveCheck: never = creature;
-      throw new Error(`Unhandled creature type: ${exhaustiveCheck}`);
+      const exhaustiveCheck: never = creature
+      throw new Error(`Unhandled creature type: ${exhaustiveCheck}`)
   }
 }
 ```
@@ -312,25 +318,26 @@ If you add a new type to the `Creature` union but forget to update this function
 Type narrowing works seamlessly with generics:
 
 ```typescript
-type Result<T> =
-  | { success: true; value: T }
-  | { success: false; error: string };
+type Result<T>
+  = | { success: true, value: T }
+    | { success: false, error: string }
 
 function unwrapResult<T>(result: Result<T>): T {
   if (result.success) {
-    return result.value; // TypeScript knows this is the success case
-  } else {
-    throw new Error(result.error); // TypeScript knows this is the error case
+    return result.value // TypeScript knows this is the success case
+  }
+  else {
+    throw new Error(result.error) // TypeScript knows this is the error case
   }
 }
 
 // Usage
-const userResult: Result<{ name: string; age: number }> = {
+const userResult: Result<{ name: string, age: number }> = {
   success: true,
   value: { name: 'Alice', age: 30 },
-};
+}
 
-const user = unwrapResult(userResult); // Type is {name: string; age: number}
+const user = unwrapResult(userResult) // Type is {name: string; age: number}
 ```
 
 ### Using Assertion Functions
@@ -340,14 +347,14 @@ TypeScript 3.7+ supports assertion functions for custom runtime validation:
 ```typescript
 function assertIsAnimal(creature: Creature): asserts creature is Animal {
   if (!('prey' in creature)) {
-    throw new Error('Not an animal!');
+    throw new Error('Not an animal!')
   }
 }
 
 function feedAnimal(creature: Creature) {
-  assertIsAnimal(creature);
+  assertIsAnimal(creature)
   // TypeScript now knows creature is an Animal
-  console.log(`Feeding ${creature.name} its favorite prey: ${creature.prey}`);
+  console.log(`Feeding ${creature.name} its favorite prey: ${creature.prey}`)
 }
 ```
 
@@ -359,7 +366,7 @@ While powerful, type narrowing isn't perfect:
 
    ```typescript
    function getProperty(obj: Creature, prop: string) {
-     return obj[prop]; // Error: Element implicitly has 'any' type
+     return obj[prop] // Error: Element implicitly has 'any' type
    }
    ```
 

@@ -15,7 +15,9 @@
         Joseph
         <span class="text-green-600 print:text-green-600">Dracup</span>
       </h1>
-      <h2 class="text-2xl font-semibold mt-1">Software Developer</h2>
+      <h2 class="text-2xl font-semibold mt-1">
+        Software Developer
+      </h2>
     </header>
 
     <!-- Two-column layout with print-specific classes -->
@@ -24,7 +26,7 @@
     >
       <!-- Left column -->
       <div
-        class="print:break-inside-avoid border-r border-gray-300 pr-6 print:pr-3"
+        class="print:break-inside-avoid md:border-r border-gray-300 pr-6 print:pr-3"
       >
         <!-- Contact -->
         <section class="mb-8 print:break-inside-avoid">
@@ -39,27 +41,22 @@
               <a
                 href="mailto:josephdracup1@gmail.com"
                 class="hover:text-green-600"
-                >josephdracup1@gmail.com</a
-              >
+              >josephdracup1@gmail.com</a>
             </li>
             <li>
               <a
                 href="https://www.linkedin.com/in/joe-dracup"
                 class="hover:text-green-600"
-                >www.linkedin.com/in/joe-dracup</a
-              >
+              >www.linkedin.com/in/joe-dracup</a>
             </li>
             <li>
               <a
                 href="https://github.com/Joe-Dracup"
                 class="hover:text-green-600"
-                >github.com/Joe-Dracup</a
-              >
+              >github.com/Joe-Dracup</a>
             </li>
             <li>
-              <a href="https://dracup.io" class="hover:text-green-600"
-                >dracup.io</a
-              >
+              <a href="https://dracup.io" class="hover:text-green-600">dracup.io</a>
             </li>
           </ul>
         </section>
@@ -80,6 +77,9 @@
             <li>Nuxt</li>
             <li>React</li>
             <li>SQL</li>
+            <li>K8s</li>
+            <li>Argo</li>
+            <li>Kargo</li>
             <li>Azure DevOps</li>
             <li>Git</li>
             <li>Github Actions</li>
@@ -176,7 +176,9 @@
               Ignite Software Systems
             </h4>
             <div class="flex justify-between items-center mb-2">
-              <h5 class="font-medium">Senior Software Engineer</h5>
+              <h5 class="font-medium">
+                Senior Software Engineer
+              </h5>
               <span class="text-sm text-gray-600">November 2022 - Present</span>
             </div>
             <div class="space-y-3 text-sm">
@@ -227,10 +229,10 @@
               musicMagpie
             </h4>
             <div class="flex justify-between items-center mb-2">
-              <h5 class="font-medium">Software Developer</h5>
-              <span class="text-sm text-gray-600"
-                >February 2021 - November 2022</span
-              >
+              <h5 class="font-medium">
+                Software Developer
+              </h5>
+              <span class="text-sm text-gray-600">February 2021 - November 2022</span>
             </div>
             <div class="space-y-3 text-sm">
               <p>
@@ -269,10 +271,10 @@
               Chess ICT
             </h4>
             <div class="flex justify-between items-center mb-2">
-              <h5 class="font-medium">Software Developer</h5>
-              <span class="text-sm text-gray-600"
-                >July 2017 - February 2021</span
-              >
+              <h5 class="font-medium">
+                Software Developer
+              </h5>
+              <span class="text-sm text-gray-600">July 2017 - February 2021</span>
             </div>
             <div class="space-y-3 text-sm">
               <p>
@@ -328,7 +330,9 @@
               Haltwhistle Swimming and Leisure Center
             </h4>
             <div class="flex justify-between items-center mb-2">
-              <h5 class="font-medium">Lifeguard and Swimming Teacher</h5>
+              <h5 class="font-medium">
+                Lifeguard and Swimming Teacher
+              </h5>
               <span class="text-sm text-gray-600">July 2015 - August 2017</span>
             </div>
             <div class="space-y-3 text-sm">
@@ -374,7 +378,9 @@
               Crackers soft play
             </h4>
             <div class="flex justify-between items-center mb-2">
-              <h5 class="font-medium">Leisure attendant</h5>
+              <h5 class="font-medium">
+                Leisure attendant
+              </h5>
               <span class="text-sm text-gray-600">August 2015 - July 2017</span>
             </div>
             <div class="space-y-3 text-sm">

@@ -1,0 +1,69 @@
+{
+  // Disable the default formatter, use eslint instead
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+
+  // Auto fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+
+  // Silent the stylistic rules in you IDE, but still auto fix them
+  "eslint.rules.customizations": [
+    { "rule": "style/*", "severity": "off" },
+    { "rule": "format/*", "severity": "off" },
+    { "rule": "*-indent", "severity": "off" },
+    { "rule": "*-spacing", "severity": "off" },
+    { "rule": "*-spaces", "severity": "off" },
+    { "rule": "*-order", "severity": "off" },
+    { "rule": "*-dangle", "severity": "off" },
+    { "rule": "*-newline", "severity": "off" },
+    { "rule": "*quotes", "severity": "off" },
+    { "rule": "*semi", "severity": "off" }
+  ],
+
+  // Enable eslint workspace support
+  "eslint.workingDirectories": [
+    { "pattern": "./mock/*", "changeProcessCWD": true },
+    { "pattern": "./lib", "changeProcessCWD": true },
+    { "pattern": "./qa-tests", "changeProcessCWD": true },
+    { "pattern": "./apps/*", "changeProcessCWD": true },
+    { "pattern": "./packages/*", "changeProcessCWD": true }
+  ],
+
+  // Enable eslint for all supported languages
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml"
+  ],
+
+  // MDC settings
+  "mdc.enableFormatting": true,
+  "[mdc]": {
+    "editor.defaultFormatter": "Nuxt.mdc",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+  },
+
+  // File Associations
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "**/content/**/*.md": "mdc"
+  },
+
+  // Enable Tailwind class completion on all string content
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+}

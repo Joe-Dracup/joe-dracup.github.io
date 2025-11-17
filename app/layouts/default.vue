@@ -18,11 +18,14 @@ const items = ref([
   {
     slot: 'mode',
   },
-]);
+])
 </script>
+
 <template>
   <UNavigationMenu :items="items" class="w-full justify-center print:hidden">
-    <template #mode><DarkModeToggle /> </template>
+    <template #mode>
+      <DarkModeToggle />
+    </template>
   </UNavigationMenu>
   <slot />
 </template>

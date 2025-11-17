@@ -27,9 +27,9 @@ When these are thrown, just let the app crash.
 
 ### Boneheaded Exceptions
 
-Examples: 
+Examples:
 ```
-ArgumentException 
+ArgumentException
 IndexOutOfRangeException
 ```
 
@@ -40,7 +40,7 @@ When writing code that is going to be re-used make sure to throw boneheaded exce
 A boneheaded exception is preferable to this as you will quickly identify the source of the issue, and not cause hard to find bugs in your application.
 
 ```typescript
-// Example 1 - the wrong way 
+// Example 1 - the wrong way
 function saveSomething(item: ObjectToSave) {
   if (item) {
     save()
@@ -50,7 +50,7 @@ function saveSomething(item: ObjectToSave) {
 // Example 2 - the better way
 function saveSomething(item: ObjectToSave) {
   if (!item) {
-    throw new Error("ArgumentException: saveSomething requires an item to save, nothing was provided.");
+    throw new Error('ArgumentException: saveSomething requires an item to save, nothing was provided.')
   }
   save()
 }
@@ -58,7 +58,7 @@ function saveSomething(item: ObjectToSave) {
 
 In the first typescript example above the function will do nothing if the item provided to it has no value, this is not immediately obvious to any calling code and could be hard to debug.
 
-In the second example it is immediately obvious that this has been called with the wrong values when the calling function propagates the error up the call stack. 
+In the second example it is immediately obvious that this has been called with the wrong values when the calling function propagates the error up the call stack.
 
 For this reason you should not try and handle boneheaded exceptions with catch blocks. These should be allowed to fail so that the bug they are preventing can be fixed early before this reaches production.
 
@@ -83,25 +83,25 @@ This instead should be avoided for the `Int32.TryParse` function which will not 
 
 string userInput = "blah";
 
-// Example 1 - the wrong way 
+// Example 1 - the wrong way
 try
 {
     var parsedInput = Int32.Parse(userInput);
     Console.WriteLine(parsedInput);
 }
-catch(FormatException e) 
+catch(FormatException e)
 {
     Console.WriteLine(e);
 }
 
-// Example 2 - the better way 
+// Example 2 - the better way
 if(Int32.TryParse(userInput, out int tryParsedInput))
 {
     Console.WriteLine(tryParsedInput);
 }
 else
 {
-    Console.WriteLine("Failed Try Parse");	
+    Console.WriteLine("Failed Try Parse");
 }
 ```
 
@@ -111,7 +111,7 @@ Using the `TryParse` function over throwing an exception to control the flow of 
 
 ### Exogenous Exceptions
 
-Examples: 
+Examples:
 ```
 FileNotFound
 ResourceUnavailable

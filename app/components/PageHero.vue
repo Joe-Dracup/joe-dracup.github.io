@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const props = defineProps<{
-  eyebrow?: string;
-  title: string;
-  description: string;
-}>();
+  eyebrow?: string
+  title: string
+  description: string
+}>()
 </script>
 
 <template>
